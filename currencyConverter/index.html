@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Coding Exercises - Currency Converter</title>
+	<script type="text/javascript" src="scripts/jquery-1.11.3.js"></script>
+	<script type="text/javascript" src="scripts/index.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles/index.css"/>
+
+</head>
+<body>
+
+	<h1>Currency Converter</h1>
+	<div></div>
+	
+	<div>
+		<p>Amount</p>
+		<input type="number" id="inputValue" value="1">
+	</div>
+	<div>
+		<p>Currency From</p>
+		<select name="currency" id="fromCurr">
+			<option value="USD">USD</option>
+			<option value="GBP">GBP</option>
+			<option value="Peso">Peso</option>
+			<option value="Rupee">Rupee</option>
+			<option value="Yen">Yen</option>
+		</select>
+		<p>Currency To</p>
+		<select name="currency" id="toCurr">
+			<option value="USD">USD</option>
+			<option value="GBP">GBP</option>
+			<option value="Peso">Peso</option>
+			<option value="Rupee">Rupee</option>
+			<option value="Yen">Yen</option>
+		</select>
+	</div>
+	<div id="convertButton">
+	<button id="convert">Convert!</button>
+	</div>
+
+	<div id="output">
+		<p><span id="inAmt" class="outField"> </span><span id="inCurr" class="outField"> </span><span> is worth </span><span id="outAmt" class="outField"> </span> <span id="outCurr" class="outField"><span>!</span></p>
+	</div>
+
+</body>
+</html>

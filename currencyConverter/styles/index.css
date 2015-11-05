@@ -1,0 +1,25 @@
+* {
+	font-family: Helvetica,sans-serif;
+	color: #11CC55;
+	background-color: #333333;
+}
+
+#output {
+	border: 1px solid #33DD33;
+	height: 100px;
+	width: 50%;
+}
+
+.outField {
+	float: left;
+	width: 40px;
+	border: 1px solid black;
+}
+
+span {
+	float: left;
+}
+
+#convert {
+	border: 2px solid #00AA00;	
+}
