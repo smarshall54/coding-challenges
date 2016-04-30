@@ -6,22 +6,34 @@
 
 /*********************************************************************************************************
 *
-*		DOCUMENT ONLOAD
+*		CONTROLLER
 *
 **********************************************************************************************************/
 
 $(document).ready(function(){
 
-	$('#convert').click(convert);
+	$('#convert').click(run);  // event listener
 
 	$('#clear').click(clearHist);
+
+function run(){ // runs the model and renders the result
+	var convertedAmt = convert();
+	console.log('Called the run function')
+	render(convertedAmt);
+};
+
+
+function render(amount){ // renders the converted amount to the view
+	document.getElementById("outAmt").innerHTML = amount;
+	console.log('Called the render function')
+};
 
 });
 
 
 /*********************************************************************************************************
 *
-*		Convert Function
+*		MODEL
 *
 **********************************************************************************************************/
 
@@ -35,9 +47,11 @@ function convert(){
 
 	output = (convAmt/convTable[fromInd])*convTable[toInd];
 
-	document.getElementById("outAmt").innerHTML = output;  // should go in controller!
+	//document.getElementById("outAmt").innerHTML = output;  // should go in controller!
 	// if this line goes in controller, then add a line like
 	// return output;
+
+	return output;
 
 	/* future functionality:
 		- round decimal places for nice display
