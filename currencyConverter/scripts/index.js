@@ -17,9 +17,9 @@ $(document).ready(function(){
 	$('#clear').click(clearHist);
 
 	function run(){ // runs the model and renders the result
-		var convertedAmt = convert();
+		var convertedAmt = convert();  // runs the model
 		//console.log('Called the run function')
-		render(convertedAmt);
+		render(convertedAmt); // runs the view
 	};
 
 });
@@ -33,6 +33,7 @@ $(document).ready(function(){
 function render(amount){ // renders the converted amount to the view
 	document.getElementById("outAmt").innerHTML = amount;
 	//console.log('Called the render function')
+	// knows nothing about the model or the controller. just renders the page with the given data.
 };
 
 function clearHist(){
@@ -46,6 +47,12 @@ function clearHist(){
 *
 **********************************************************************************************************/
 
+
+/***************
+"Business Layer"
+
+contains "business logic"
+****************/
 function convert(){
 
 	var inputs = validate();
@@ -56,11 +63,7 @@ function convert(){
 
 	output = (convAmt/convTable[fromInd])*convTable[toInd];
 
-	//document.getElementById("outAmt").innerHTML = output;  // should go in controller!
-	// if this line goes in controller, then add a line like
-	// return output;
-
-	return output;
+	return output; // knows nothing about the view or the controller, just outputs it's modeled data.
 
 	/* future functionality:
 		- round decimal places for nice display
@@ -74,7 +77,15 @@ function convert(){
 	*/
 };
 
-function validate(){
+/**************
+"Service Layer"
+
+- gets data from various locations such as form inputs, server/database if there was one,
+	or external website database of currency conversion factors.
+- maps / formats data from various sources into something the business logic can use
+- calls 
+***************/
+function validate(){ // also part of the model
 
 	convAmt = parseFloat(document.getElementById("inputValue").value);
 	fromCurr = document.getElementById("fromCurr").value;
