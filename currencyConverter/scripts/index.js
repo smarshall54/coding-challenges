@@ -24,9 +24,10 @@ $(document).ready(function(){
 			// passes that data to the business logic (convert function)
 			var convertedAmt = convert(validatedData);  // runs the model
 			//console.log('Called the run function')
+			renderFormErr(errorFlag);
 			render(convertedAmt); // runs the view
 		} else {
-			renderFormErr();
+			renderFormErr(errorFlag);
 		}
 		
 	};
@@ -45,8 +46,18 @@ function render(amount){ // renders the converted amount to the view
 	// knows nothing about the model or the controller. just renders the page with the given data.
 };
 
-function renderFormErr(){
-	document.getElementById("errMsg").innerHTML = "There was a problem with your input data!";
+function renderFormErr(flag){
+	var message = document.getElementById("errMsg").innerHTML;
+	console.log(message)
+
+	if (flag=='no error'){
+		document.getElementById("errMsg").innerHTML = '';
+		//console.log('clearing message')
+	} else if(flag=='error') {
+		document.getElementById("errMsg").innerHTML = 'There was a problem with your input data!';
+		//console.log('writing message')
+	};
+
 };
 
 function clearHist(){
@@ -110,12 +121,21 @@ function validate(){ // also part of the model.
 	
 
 	var formData = [convAmt, fromCurr, toCurr];
+	
+	if(0){ // no actual checks for form data yet. convenient test case is to put convAmt==1 in the conditional.
+			// that way if the user enters "1" as the amount to convert it will throw error. useful for basic testing of form validation.
+		var isErr = 1;
+	} else {
+		var isErr = 0;
+	};
+	
 
-	if(0){ // "1" should instead be a conditional checking the validity of the data, such as if it is a number or a valid currency name, etc.
+	if(isErr){
 		var validationErrorFlag = 'error';
 	} else {
 		var validationErrorFlag = 'no error';
 	};
+	//console.log(validationErrorFlag)
 
 	return [formData, validationErrorFlag];
 
