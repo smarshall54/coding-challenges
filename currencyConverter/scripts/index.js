@@ -35,7 +35,9 @@ function convert(){
 
 	output = (convAmt/convTable[fromInd])*convTable[toInd];
 
-	document.getElementById("outAmt").innerHTML = output;
+	document.getElementById("outAmt").innerHTML = output;  // should go in controller!
+	// if this line goes in controller, then add a line like
+	// return output;
 
 	/* future functionality:
 		- round decimal places for nice display
