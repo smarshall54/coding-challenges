@@ -16,19 +16,28 @@ $(document).ready(function(){
 
 	$('#clear').click(clearHist);
 
-function run(){ // runs the model and renders the result
-	var convertedAmt = convert();
-	console.log('Called the run function')
-	render(convertedAmt);
-};
+	function run(){ // runs the model and renders the result
+		var convertedAmt = convert();
+		//console.log('Called the run function')
+		render(convertedAmt);
+	};
 
+});
+
+/*********************************************************************************************************
+*
+*		VIEW
+*
+**********************************************************************************************************/
 
 function render(amount){ // renders the converted amount to the view
 	document.getElementById("outAmt").innerHTML = amount;
-	console.log('Called the render function')
+	//console.log('Called the render function')
 };
 
-});
+function clearHist(){
+
+};
 
 
 /*********************************************************************************************************
@@ -77,8 +86,4 @@ function validate(){
 	var formData = [convAmt, fromCurr, toCurr];
 
 	return formData;
-};
-
-function clearHist(){
-
 };
