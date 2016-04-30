@@ -17,9 +17,18 @@ $(document).ready(function(){
 	$('#clear').click(clearHist);
 
 	function run(){ // runs the model and renders the result
-		var convertedAmt = convert();  // runs the model
-		//console.log('Called the run function')
-		render(convertedAmt); // runs the view
+		var [validatedData, errorFlag] = validate(); // calls the service layer (form validation function) to get data from the form		
+
+		// renders the result or an error message if the data is not valid.
+		if (errorFlag != 'error'){
+			// passes that data to the business logic (convert function)
+			var convertedAmt = convert(validatedData);  // runs the model
+			//console.log('Called the run function')
+			render(convertedAmt); // runs the view
+		} else {
+			renderFormErr();
+		}
+		
 	};
 
 });
@@ -34,6 +43,10 @@ function render(amount){ // renders the converted amount to the view
 	document.getElementById("outAmt").innerHTML = amount;
 	//console.log('Called the render function')
 	// knows nothing about the model or the controller. just renders the page with the given data.
+};
+
+function renderFormErr(){
+	document.getElementById("errMsg").innerHTML = "There was a problem with your input data!";
 };
 
 function clearHist(){
@@ -53,16 +66,15 @@ function clearHist(){
 
 contains "business logic"
 ****************/
-function convert(){
+function convert(inputs){
 
-	var inputs = validate();
-
+	//var inputs = validate();
+	convAmt = inputs[0];
 	convTable = [1, 0.65, 16.53, 65.75, 121.88];
 	fromInd = inputs.indexOf(inputs[1]);
 	toInd = inputs.indexOf(inputs[2]);
 
 	output = (convAmt/convTable[fromInd])*convTable[toInd];
-
 	return output; // knows nothing about the view or the controller, just outputs it's modeled data.
 
 	/* future functionality:
@@ -85,16 +97,26 @@ function convert(){
 - maps / formats data from various sources into something the business logic can use
 - calls 
 ***************/
-function validate(){ // also part of the model
+function validate(){ // also part of the model.
+	// - retrieves data from the form
+	// - checks that the data is valid for the model (not actually doing any checking yet)
+	// - formats the data in a way the model can use as input
 
-	convAmt = parseFloat(document.getElementById("inputValue").value);
-	fromCurr = document.getElementById("fromCurr").value;
-	toCurr = document.getElementById("toCurr").value;
+	var convAmt = parseFloat(document.getElementById("inputValue").value);
+	var fromCurr = document.getElementById("fromCurr").value;
+	var toCurr = document.getElementById("toCurr").value;
 		console.log("Converting "+convAmt+" "+fromCurr+" to "+toCurr);
 
-
+	
 
 	var formData = [convAmt, fromCurr, toCurr];
 
-	return formData;
+	if(0){ // "1" should instead be a conditional checking the validity of the data, such as if it is a number or a valid currency name, etc.
+		var validationErrorFlag = 'error';
+	} else {
+		var validationErrorFlag = 'no error';
+	};
+
+	return [formData, validationErrorFlag];
+
 };
